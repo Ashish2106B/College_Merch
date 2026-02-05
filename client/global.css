@@ -107,6 +107,22 @@
     @apply bg-background text-foreground;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
+  }
+
+  h1 {
+    @apply text-4xl md:text-6xl leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -116,5 +132,31 @@
   code {
     overflow-x: auto;
     white-space: pre;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold transition-all duration-300 hover:shadow-lg active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-secondary text-secondary-foreground rounded-xl font-semibold transition-all duration-300 hover:shadow-lg active:scale-95;
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 border-2 border-foreground text-foreground rounded-xl font-semibold transition-all duration-300 hover:bg-foreground hover:text-background active:scale-95;
+  }
+
+  .card-shadow {
+    @apply shadow-[0_4px_20px_rgba(0,0,0,0.06)];
+  }
+
+  .card-shadow-lg {
+    @apply shadow-[0_12px_40px_rgba(0,0,0,0.12)];
+  }
+
+  .underline-accent {
+    @apply relative inline-block after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full after:w-0;
   }
 }
