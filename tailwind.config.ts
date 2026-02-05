@@ -14,6 +14,7 @@ export default {
     },
     fontFamily: {
       sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+      display: ["Inter", "system-ui", "-apple-system", "sans-serif"],
     },
     extend: {
       colors: {
