@@ -10,14 +10,13 @@ export default function Header() {
     <header className="fixed top-0 w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 z-50 border-b border-border card-shadow">
       <nav className="container mx-auto px-4 py-4 md:py-5 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          to="/"
-          className="flex items-center gap-2 group"
-        >
+        <Link to="/" className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm">
             C
           </div>
-          <span className="text-lg font-bold text-foreground tracking-tight">COLLEG</span>
+          <span className="text-lg font-bold text-foreground tracking-tight">
+            COLLEG
+          </span>
         </Link>
 
         {/* Desktop Menu */}

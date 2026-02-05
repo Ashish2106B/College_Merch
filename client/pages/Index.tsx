@@ -9,42 +9,48 @@ const products = [
     id: 1,
     name: "Premium Hoodie",
     price: 1499,
-    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%23FFD700' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23333' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3EPremium Hoodie%3C/text%3E%3C/svg%3E",
+    image:
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%23FFD700' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23333' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3EPremium Hoodie%3C/text%3E%3C/svg%3E",
     category: "Apparel",
   },
   {
     id: 2,
     name: "Classic T-Shirt",
     price: 599,
-    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%238B4513' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3ET-Shirt%3C/text%3E%3C/svg%3E",
+    image:
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%238B4513' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3ET-Shirt%3C/text%3E%3C/svg%3E",
     category: "Apparel",
   },
   {
     id: 3,
     name: "College Cap",
     price: 399,
-    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%23FF6B6B' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3ECollege Cap%3C/text%3E%3C/svg%3E",
+    image:
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%23FF6B6B' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3ECollege Cap%3C/text%3E%3C/svg%3E",
     category: "Accessories",
   },
   {
     id: 4,
     name: "Notebook Set",
     price: 449,
-    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%234ECDC4' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3ENotebook Set%3C/text%3E%3C/svg%3E",
+    image:
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%234ECDC4' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3ENotebook Set%3C/text%3E%3C/svg%3E",
     category: "Stationery",
   },
   {
     id: 5,
     name: "Bottle",
     price: 699,
-    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%2345B7D1' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3EBottle%3C/text%3E%3C/svg%3E",
+    image:
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%2345B7D1' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3EBottle%3C/text%3E%3C/svg%3E",
     category: "Accessories",
   },
   {
     id: 6,
     name: "Varsity Jacket",
     price: 2499,
-    image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%239B59B6' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3EVarsity Jacket%3C/text%3E%3C/svg%3E",
+    image:
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect fill='%239B59B6' width='500' height='500'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3EVarsity Jacket%3C/text%3E%3C/svg%3E",
     category: "Apparel",
   },
 ];
@@ -88,7 +94,7 @@ export default function Index() {
 
   const cartTotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
 
   const categories = ["All", "Apparel", "Accessories", "Stationery"];
@@ -125,7 +131,9 @@ export default function Index() {
               </h1>
 
               <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
-                Premium college merchandise designed for students who want to express their personality. From hoodies to accessories, wear your pride with confidence.
+                Premium college merchandise designed for students who want to
+                express their personality. From hoodies to accessories, wear
+                your pride with confidence.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -169,8 +177,12 @@ export default function Index() {
 
               {/* Floating badge */}
               <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 card-shadow-lg">
-                <p className="text-sm font-bold text-foreground">Free Shipping</p>
-                <p className="text-xs text-muted-foreground">on orders above ₹999</p>
+                <p className="text-sm font-bold text-foreground">
+                  Free Shipping
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  on orders above ₹999
+                </p>
               </div>
             </div>
           </div>
@@ -185,7 +197,8 @@ export default function Index() {
               Our Collection
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              Carefully curated selection of premium college merchandise designed for students who want to make a statement.
+              Carefully curated selection of premium college merchandise
+              designed for students who want to make a statement.
             </p>
 
             {/* Category Filter */}
@@ -218,14 +231,18 @@ export default function Index() {
       <BenefitsSection />
 
       {/* Deals Section */}
-      <section id="deals" className="py-16 md:py-24 bg-gradient-to-br from-secondary/5 via-background to-primary/5">
+      <section
+        id="deals"
+        className="py-16 md:py-24 bg-gradient-to-br from-secondary/5 via-background to-primary/5"
+      >
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Best Value Bundles
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Get more, pay less. Our student-favorite combo deals let you save big.
+              Get more, pay less. Our student-favorite combo deals let you save
+              big.
             </p>
           </div>
 
@@ -252,7 +269,10 @@ export default function Index() {
                 {/* Items list */}
                 <ul className="mb-6 space-y-2">
                   {deal.items.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <li
+                      key={idx}
+                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                    >
                       <Check className="w-4 h-4 text-primary" />
                       {item}
                     </li>
@@ -261,7 +281,9 @@ export default function Index() {
 
                 {/* Pricing */}
                 <div className="mb-6 pb-6 border-b border-border">
-                  <p className="text-4xl font-bold text-primary">₹{deal.price}</p>
+                  <p className="text-4xl font-bold text-primary">
+                    ₹{deal.price}
+                  </p>
                   {deal.originalPrice && (
                     <p className="text-sm text-muted-foreground line-through mt-2">
                       ₹{deal.originalPrice}
@@ -274,7 +296,9 @@ export default function Index() {
 
                 <button
                   className={
-                    deal.highlight ? "btn-primary w-full" : "btn-secondary w-full"
+                    deal.highlight
+                      ? "btn-primary w-full"
+                      : "btn-secondary w-full"
                   }
                 >
                   Add to Cart
@@ -295,7 +319,8 @@ export default function Index() {
                 Get in Touch
               </h2>
               <p className="text-muted-foreground mb-8">
-                Have questions or ready to order? Reach out and we'll get back to you ASAP.
+                Have questions or ready to order? Reach out and we'll get back
+                to you ASAP.
               </p>
 
               <form className="flex flex-col gap-5">
@@ -408,7 +433,8 @@ export default function Index() {
                 <p className="font-bold text-lg">COLLEG</p>
               </div>
               <p className="text-sm text-white/70">
-                Premium college merchandise for students who want to make a statement.
+                Premium college merchandise for students who want to make a
+                statement.
               </p>
             </div>
 
@@ -484,7 +510,8 @@ export default function Index() {
 
           <div className="border-t border-white/20 pt-8">
             <p className="text-center text-sm text-white/70">
-              © 2024 COLLEG. All rights reserved. Made for students, by students.
+              © 2024 COLLEG. All rights reserved. Made for students, by
+              students.
             </p>
           </div>
         </div>
