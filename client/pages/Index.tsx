@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { X, MessageCircle } from "lucide-react";
+import { X, MessageCircle, Check } from "lucide-react";
 import Header from "@/components/Header";
 import ProductCard from "@/components/ProductCard";
+import BenefitsSection from "@/components/BenefitsSection";
 
 const products = [
   {
@@ -9,7 +10,7 @@ const products = [
     name: "Premium Hoodie",
     price: 1499,
     image:
-      "https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=500&h=500&fit=crop",
     category: "Apparel",
   },
   {
@@ -17,7 +18,7 @@ const products = [
     name: "Classic T-Shirt",
     price: 599,
     image:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=500&fit=crop",
     category: "Apparel",
   },
   {
@@ -25,7 +26,7 @@ const products = [
     name: "College Cap",
     price: 399,
     image:
-      "https://images.unsplash.com/photo-1595777707802-c2265fbe1e0d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1595777707802-c2265fbe1e0d?w=500&h=500&fit=crop",
     category: "Accessories",
   },
   {
@@ -33,7 +34,7 @@ const products = [
     name: "Notebook Set",
     price: 449,
     image:
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&h=500&fit=crop",
     category: "Stationery",
   },
   {
@@ -41,7 +42,7 @@ const products = [
     name: "Bottle",
     price: 699,
     image:
-      "https://images.unsplash.com/photo-1602143407151-7111542de6e9?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1602143407151-7111542de6e9?w=500&h=500&fit=crop",
     category: "Accessories",
   },
   {
@@ -49,7 +50,7 @@ const products = [
     name: "Varsity Jacket",
     price: 2499,
     image:
-      "https://images.unsplash.com/photo-1551028719-00167b16ebc5?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1551028719-00167b16ebc5?w=500&h=500&fit=crop",
     category: "Apparel",
   },
 ];
@@ -58,26 +59,29 @@ const deals = [
   {
     id: 1,
     title: "Student Combo",
-    items: "Hoodie + T-Shirt + Cap",
+    items: ["Hoodie", "T-Shirt", "Cap"],
     price: 2199,
     originalPrice: 2497,
-    badge: "POPULAR",
+    badge: "🔥 Most Popular",
+    highlight: false,
   },
   {
     id: 2,
     title: "Starter Pack",
-    items: "2 T-Shirts + Notebook",
+    items: ["2 T-Shirts", "Notebook"],
     price: 1299,
     originalPrice: 1448,
     badge: null,
+    highlight: false,
   },
   {
     id: 3,
     title: "Premium Bundle",
-    items: "Hoodie + Jacket + Cap",
+    items: ["Hoodie", "Jacket", "Cap"],
     price: 4099,
     originalPrice: 4397,
-    badge: "BEST VALUE",
+    badge: "💎 Best Value",
+    highlight: true,
   },
 ];
 
@@ -86,79 +90,148 @@ export default function Index() {
   const [cartItems] = useState([
     { id: 1, name: "Premium Hoodie", quantity: 1, price: 1499 },
   ]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const cartTotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const categories = ["All", "Apparel", "Accessories", "Stationery"];
+  const filteredProducts =
+    selectedCategory === "All"
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-background via-background to-secondary/5">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center gap-6 md:gap-8">
-            <div className="inline-block px-4 py-2 rounded-full bg-secondary/20 border border-secondary/50">
-              <p className="text-sm font-medium text-foreground">
-                Exclusive College Merchandise
+      <section className="relative pt-32 pb-16 md:pt-44 md:pb-24 overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10 pointer-events-none" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left side - Text */}
+            <div className="flex flex-col gap-6 md:gap-8">
+              <div className="inline-flex items-center gap-2 w-fit px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <p className="text-xs font-bold text-primary uppercase tracking-widest">
+                  Exclusive College Merch
+                </p>
+              </div>
+
+              <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
+                Rep Your Campus.{" "}
+                <span className="bg-gradient-to-r from-primary to-secondary/80 bg-clip-text text-transparent">
+                  Own Your Style.
+                </span>
+              </h1>
+
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+                Premium college merchandise designed for students who want to express their personality. From hoodies to accessories, wear your pride with confidence.
               </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <a
+                  href="#products"
+                  className="btn-primary inline-block text-center"
+                >
+                  Shop Collection
+                </a>
+                <a
+                  href="#deals"
+                  className="btn-outline inline-block text-center"
+                >
+                  View Deals
+                </a>
+              </div>
+
+              {/* Social proof */}
+              <div className="flex items-center gap-4 pt-4">
+                <div>
+                  <p className="text-sm font-bold text-foreground">
+                    1,200+ Happy Students
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    on campus already
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight max-w-3xl">
-              Wear Your College Pride
-            </h1>
+            {/* Right side - Image */}
+            <div className="relative hidden md:block">
+              <div className="relative w-full aspect-square rounded-3xl overflow-hidden card-shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=600&h=600&fit=crop"
+                  alt="College students wearing merchandise"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              </div>
 
-            <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-              Premium quality hoodies, T-shirts, caps, and accessories designed
-              for college students. Express your personality with exclusive merch.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <a
-                href="#products"
-                className="px-8 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-opacity-90 transition-all active:scale-95 inline-block text-center"
-              >
-                Shop Now
-              </a>
-              <a
-                href="#pricing"
-                className="px-8 py-4 bg-secondary text-foreground rounded-xl font-semibold hover:bg-opacity-80 transition-all active:scale-95 inline-block text-center"
-              >
-                Explore Deals
-              </a>
+              {/* Floating badge */}
+              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 card-shadow-lg">
+                <p className="text-sm font-bold text-foreground">Free Shipping</p>
+                <p className="text-xs text-muted-foreground">on orders above ₹999</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-16 md:py-24">
+      <section id="products" className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Our Collection
             </h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Carefully curated selection of premium college merchandise
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+              Carefully curated selection of premium college merchandise designed for students who want to make a statement.
             </p>
+
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center gap-3">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
+                    selectedCategory === category
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-background text-foreground border border-border hover:border-primary"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing & Deals Section */}
-      <section id="pricing" className="py-16 md:py-24 bg-background/50">
+      {/* Benefits Section */}
+      <BenefitsSection />
+
+      {/* Deals Section */}
+      <section id="deals" className="py-16 md:py-24 bg-gradient-to-br from-secondary/5 via-background to-primary/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-              Best Value Deals
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Best Value Bundles
             </h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Save more with our exclusive combo packages
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Get more, pay less. Our student-favorite combo deals let you save big.
             </p>
           </div>
 
@@ -166,37 +239,50 @@ export default function Index() {
             {deals.map((deal) => (
               <div
                 key={deal.id}
-                className={`relative p-6 md:p-8 rounded-2xl border transition-all ${
-                  deal.badge === "BEST VALUE"
-                    ? "border-accent bg-white shadow-lg scale-105"
-                    : "border-border bg-white hover:shadow-md"
+                className={`relative rounded-2xl p-8 transition-all duration-300 ${
+                  deal.highlight
+                    ? "bg-white border-2 border-primary card-shadow-lg scale-105 md:scale-110"
+                    : "bg-white border border-border card-shadow hover:card-shadow-lg"
                 }`}
               >
                 {deal.badge && (
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-accent text-foreground text-xs font-bold rounded-full">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-foreground text-white text-sm font-bold rounded-full">
                     {deal.badge}
                   </div>
                 )}
 
-                <h3 className="text-lg font-bold text-foreground mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-3">
                   {deal.title}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {deal.items}
-                </p>
 
-                <div className="mb-6">
-                  <p className="text-3xl font-bold text-primary">
-                    ₹{deal.price}
-                  </p>
+                {/* Items list */}
+                <ul className="mb-6 space-y-2">
+                  {deal.items.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Check className="w-4 h-4 text-primary" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Pricing */}
+                <div className="mb-6 pb-6 border-b border-border">
+                  <p className="text-4xl font-bold text-primary">₹{deal.price}</p>
                   {deal.originalPrice && (
-                    <p className="text-sm text-muted-foreground line-through mt-1">
+                    <p className="text-sm text-muted-foreground line-through mt-2">
                       ₹{deal.originalPrice}
                     </p>
                   )}
+                  <p className="text-xs text-primary font-semibold mt-2">
+                    Save ₹{deal.originalPrice - deal.price}
+                  </p>
                 </div>
 
-                <button className="w-full py-3 bg-primary text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all active:scale-95">
+                <button
+                  className={
+                    deal.highlight ? "btn-primary w-full" : "btn-secondary w-full"
+                  }
+                >
                   Add to Cart
                 </button>
               </div>
@@ -205,39 +291,54 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Contact & CTA Section */}
-      <section id="contact" className="py-16 md:py-24">
+      {/* Contact Section */}
+      <section id="contact" className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
                 Get in Touch
               </h2>
               <p className="text-muted-foreground mb-8">
-                Have questions? Reach out to us via WhatsApp or fill out the form below.
+                Have questions or ready to order? Reach out and we'll get back to you ASAP.
               </p>
 
-              <form className="flex flex-col gap-4">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <textarea
-                  placeholder="Your Message"
-                  rows={4}
-                  className="px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                />
-                <button
-                  type="submit"
-                  className="py-3 bg-primary text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all active:scale-95"
-                >
+              <form className="flex flex-col gap-5">
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    className="w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-foreground mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    placeholder="Tell us what's on your mind..."
+                    rows={5}
+                    className="w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                  />
+                </div>
+
+                <button type="submit" className="btn-primary">
                   Send Message
                 </button>
               </form>
@@ -245,38 +346,53 @@ export default function Index() {
 
             {/* Contact Info */}
             <div className="flex flex-col gap-8">
-              <div className="p-6 bg-background rounded-2xl border border-border">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-                    <MessageCircle className="w-6 h-6 text-foreground" />
+              {/* WhatsApp Card */}
+              <div className="p-8 bg-gradient-to-br from-green-50 to-green-100/50 rounded-2xl border border-green-200">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center text-white">
+                    <MessageCircle className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">WhatsApp</p>
-                    <p className="font-semibold text-foreground">+91 9876543210</p>
+                    <p className="text-sm text-green-700 font-semibold">
+                      WhatsApp
+                    </p>
+                    <p className="text-xl font-bold text-foreground">
+                      +91 9876543210
+                    </p>
                   </div>
                 </div>
+                <p className="text-sm text-green-700">
+                  💬 Instant response • Mon-Fri 9AM-9PM
+                </p>
               </div>
 
-              <div className="p-6 bg-background rounded-2xl border border-border">
-                <h3 className="font-semibold text-foreground mb-4">
-                  Why Choose Us?
+              {/* Email Card */}
+              <div className="p-6 rounded-2xl border border-border bg-background">
+                <p className="text-sm font-semibold text-muted-foreground mb-2">
+                  Email
+                </p>
+                <p className="text-lg font-bold text-foreground">
+                  hello@colleg.in
+                </p>
+              </div>
+
+              {/* Info Card */}
+              <div className="p-6 rounded-2xl border border-border bg-background">
+                <h3 className="font-bold text-foreground mb-4">
+                  Shipping & Returns
                 </h3>
-                <ul className="space-y-3 text-sm text-muted-foreground">
+                <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex gap-2">
                     <span className="text-primary font-bold">✓</span>
-                    <span>Premium quality merchandise</span>
+                    <span>Free shipping on orders above ₹999</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-primary font-bold">✓</span>
-                    <span>Fast & reliable delivery</span>
+                    <span>7-day return policy, no questions asked</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-primary font-bold">✓</span>
-                    <span>Exclusive college designs</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-primary font-bold">✓</span>
-                    <span>Friendly customer support</span>
+                    <span>Express delivery available to your campus</span>
                   </li>
                 </ul>
               </div>
@@ -286,123 +402,151 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8 md:py-12 bg-background/50">
+      <footer className="bg-gradient-to-b from-foreground to-foreground/95 text-white py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            {/* Brand */}
             <div>
-              <p className="font-bold text-foreground mb-3">COLLEG</p>
-              <p className="text-sm text-muted-foreground">
-                Premium college merchandise for students.
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-foreground font-bold text-sm">
+                  C
+                </div>
+                <p className="font-bold text-lg">COLLEG</p>
+              </div>
+              <p className="text-sm text-white/70">
+                Premium college merchandise for students who want to make a statement.
               </p>
             </div>
+
+            {/* Shop */}
             <div>
-              <p className="font-semibold text-foreground text-sm mb-3">Shop</p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <p className="font-semibold text-white mb-4">Shop</p>
+              <ul className="space-y-2 text-sm text-white/70">
                 <li>
-                  <a href="#products" className="hover:text-foreground transition">
+                  <a href="#products" className="hover:text-white transition">
                     All Products
                   </a>
                 </li>
                 <li>
-                  <a href="#pricing" className="hover:text-foreground transition">
-                    Deals
+                  <a href="#deals" className="hover:text-white transition">
+                    Bundle Deals
+                  </a>
+                </li>
+                <li>
+                  <a href="#products" className="hover:text-white transition">
+                    New Arrivals
                   </a>
                 </li>
               </ul>
             </div>
+
+            {/* Support */}
             <div>
-              <p className="font-semibold text-foreground text-sm mb-3">Support</p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <p className="font-semibold text-white mb-4">Support</p>
+              <ul className="space-y-2 text-sm text-white/70">
                 <li>
-                  <a href="#contact" className="hover:text-foreground transition">
+                  <a href="#contact" className="hover:text-white transition">
                     Contact Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-foreground transition">
+                  <a href="#" className="hover:text-white transition">
                     FAQs
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition">
+                    Shipping Info
                   </a>
                 </li>
               </ul>
             </div>
+
+            {/* Social */}
             <div>
-              <p className="font-semibold text-foreground text-sm mb-3">Follow</p>
+              <p className="font-semibold text-white mb-4">Follow Us</p>
               <div className="flex gap-3">
                 <a
                   href="#"
-                  className="w-8 h-8 rounded-full bg-secondary hover:bg-opacity-80 transition flex items-center justify-center text-foreground"
+                  className="w-10 h-10 rounded-lg bg-white/20 hover:bg-white/30 transition flex items-center justify-center text-white"
                 >
                   f
                 </a>
                 <a
                   href="#"
-                  className="w-8 h-8 rounded-full bg-secondary hover:bg-opacity-80 transition flex items-center justify-center text-foreground"
+                  className="w-10 h-10 rounded-lg bg-white/20 hover:bg-white/30 transition flex items-center justify-center text-white"
                 >
                   @
                 </a>
                 <a
                   href="#"
-                  className="w-8 h-8 rounded-full bg-secondary hover:bg-opacity-80 transition flex items-center justify-center text-foreground"
+                  className="w-10 h-10 rounded-lg bg-white/20 hover:bg-white/30 transition flex items-center justify-center text-white"
                 >
                   in
                 </a>
               </div>
             </div>
           </div>
-          <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            <p>© 2024 COLLEG. All rights reserved.</p>
+
+          <div className="border-t border-white/20 pt-8">
+            <p className="text-center text-sm text-white/70">
+              © 2024 COLLEG. All rights reserved. Made for students, by students.
+            </p>
           </div>
         </div>
       </footer>
 
       {/* Cart Slide-in Panel */}
       {showCart && (
-        <div className="fixed inset-0 z-40 bg-black/50" onClick={() => setShowCart(false)} />
+        <div
+          className="fixed inset-0 z-40 bg-black/50 animate-fade-in"
+          onClick={() => setShowCart(false)}
+        />
       )}
       <div
-        className={`fixed right-0 top-0 h-full w-full sm:w-96 bg-white z-50 shadow-2xl transition-transform duration-300 ${
+        className={`fixed right-0 top-0 h-full w-full sm:w-96 bg-white z-50 card-shadow-lg transition-transform duration-300 flex flex-col ${
           showCart ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-6 h-full flex flex-col">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-foreground">Shopping Cart</h2>
-            <button
-              onClick={() => setShowCart(false)}
-              className="p-2 hover:bg-secondary rounded-lg transition"
+        <div className="p-6 border-b border-border flex items-center justify-between">
+          <h2 className="text-xl font-bold text-foreground">Shopping Cart</h2>
+          <button
+            onClick={() => setShowCart(false)}
+            className="p-2 hover:bg-background rounded-lg transition"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+          {cartItems.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between p-4 bg-background rounded-xl"
             >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto space-y-4 mb-6">
-            {cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center gap-3 p-3 bg-background rounded-lg"
-              >
-                <div className="flex-1">
-                  <p className="font-semibold text-foreground text-sm">
-                    {item.name}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Qty: {item.quantity}
-                  </p>
-                </div>
-                <p className="font-bold text-primary">₹{item.price}</p>
+              <div>
+                <p className="font-semibold text-foreground">{item.name}</p>
+                <p className="text-xs text-muted-foreground">
+                  Qty: {item.quantity}
+                </p>
               </div>
-            ))}
-          </div>
-
-          <div className="space-y-4 border-t border-border pt-4">
-            <div className="flex items-center justify-between">
-              <p className="text-foreground font-semibold">Total:</p>
-              <p className="text-xl font-bold text-primary">₹{cartTotal}</p>
+              <p className="font-bold text-primary">₹{item.price}</p>
             </div>
-            <button className="w-full py-3 bg-primary text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all active:scale-95">
-              Proceed to Order
-            </button>
+          ))}
+        </div>
+
+        <div className="border-t border-border p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-foreground font-semibold">Total:</p>
+            <p className="text-2xl font-bold text-primary">₹{cartTotal}</p>
           </div>
+          <button className="btn-primary w-full">Proceed to Checkout</button>
+          <button
+            onClick={() => setShowCart(false)}
+            className="w-full py-3 border-2 border-border text-foreground rounded-xl font-semibold hover:bg-background transition-all"
+          >
+            Continue Shopping
+          </button>
         </div>
       </div>
     </div>
