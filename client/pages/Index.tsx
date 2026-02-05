@@ -9,48 +9,42 @@ const products = [
     id: 1,
     name: "Premium Hoodie",
     price: 1499,
-    image:
-      "https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=500&h=500&fit=crop",
+    image: "https://picsum.photos/500/500?random=1",
     category: "Apparel",
   },
   {
     id: 2,
     name: "Classic T-Shirt",
     price: 599,
-    image:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=500&fit=crop",
+    image: "https://picsum.photos/500/500?random=2",
     category: "Apparel",
   },
   {
     id: 3,
     name: "College Cap",
     price: 399,
-    image:
-      "https://images.unsplash.com/photo-1595777707802-c2265fbe1e0d?w=500&h=500&fit=crop",
+    image: "https://picsum.photos/500/500?random=3",
     category: "Accessories",
   },
   {
     id: 4,
     name: "Notebook Set",
     price: 449,
-    image:
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&h=500&fit=crop",
+    image: "https://picsum.photos/500/500?random=4",
     category: "Stationery",
   },
   {
     id: 5,
     name: "Bottle",
     price: 699,
-    image:
-      "https://images.unsplash.com/photo-1602143407151-7111542de6e9?w=500&h=500&fit=crop",
+    image: "https://picsum.photos/500/500?random=5",
     category: "Accessories",
   },
   {
     id: 6,
     name: "Varsity Jacket",
     price: 2499,
-    image:
-      "https://images.unsplash.com/photo-1551028719-00167b16ebc5?w=500&h=500&fit=crop",
+    image: "https://picsum.photos/500/500?random=6",
     category: "Apparel",
   },
 ];
