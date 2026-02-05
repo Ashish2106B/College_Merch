@@ -160,7 +160,7 @@ export default function Index() {
             <div className="relative hidden md:block">
               <div className="relative w-full aspect-square rounded-3xl overflow-hidden card-shadow-lg">
                 <img
-                  src="https://loremflickr.com/600/600?college,students,apparel"
+                  src="https://via.placeholder.com/600x600?text=College+Merchandise"
                   alt="College students wearing merchandise"
                   className="w-full h-full object-cover"
                 />
